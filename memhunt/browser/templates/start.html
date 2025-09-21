@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }}</title>
+    <link rel="stylesheet" href="../zpt/debug.css">
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .debug_table { margin-left: 40px; }
+        h1 { font-size: 140%; font-weight: bold; margin-bottom: 10px; padding: 10px 10px; width: 70%; border-bottom: 1px solid #ccc; }
+        .description { margin-right: 35%; margin-left: 3em; }
+        .sub_heading { font-size: 115%; color: grey; margin-bottom: 8px; }
+        .debug_body { margin-left: 3em; }
+        ul.debug_body li { margin-bottom: 5px; }
+        a { color: #0066cc; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+    <div class="debug_table">
+        {% if context.title %}
+        <br><a href=".">Back to {{ context.title }}</a>
+        {% endif %}
+
+        <h1>{{ title }}</h1>
+
+        <p class="description"> 
+            The *Dependency Graph Views* is a set of views that utilize the objgraph.py package.
+            This ref_tools view is registered for every context level for managers which makes it really easy
+            to get a dependency graph for any context level in your application. 
+        </p>
+
+        <br>
+        <h3 class="sub_heading">Dependency Graph Views</h3>
+
+        <ul class="debug_body">
+            <li>
+                <a href="./context_refs.png">This Context's Reference Graph</a>
+            </li>
+            
+            <li>
+                <a href="context_backrefs.png">This Context's Back-Reference Graph</a>
+            </li>
+        
+            <li>
+                <a href="ref_count">View Modules Ref-Counts</a>
+            </li>
+
+            <li>
+                <a href="ref_common_count">View Most Common Objects in Garbage</a>
+            </li>
+        </ul>
+
+        <br>
+        <h3 class="sub_heading">Memory Introspection Views</h3>
+        <ul class="debug_body">
+            <li>
+                <a href="memory">View Memory</a>
+            </li>
+
+            <li>
+                <a href="relative_memory">View Relative Memory</a>
+            </li>
+
+            <li>
+                <a href="traverse_relative_memory">View Traversed Relative Memory</a>
+            </li>
+
+            <li>
+                <a href="by_referrers">View memory by Referrers</a>
+            </li>
+
+            <li>
+                <a href="get_biggest_offender">View Biggest Memory Offender</a>
+            </li>
+        </ul>
+    </div>
+</body>
+</html>

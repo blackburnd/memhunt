@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Most Common Objects</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        h1 { font-size: 140%; font-weight: bold; margin-bottom: 10px; padding: 10px 10px; width: 70%; border-bottom: 1px solid #ccc; }
+        table { border: 1px solid #999; width: 60%; border-collapse: collapse; }
+        table td { text-align: left; vertical-align: middle; font-size: 90%; padding: 2px 5px; border: 1px solid #ddd; }
+        table th { background-color: #ccc; font-size: 90%; font-weight: bolder; padding: 5px; border: 1px solid #999; }
+        a { color: #0066cc; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+    <div class="title">
+        <h1>Most Common Objects</h1>
+    </div>
+
+    <div>
+        <p>
+            <table summary="Most common in garbage" width="100%">
+                <thead>
+                    <tr>
+                        <th scope="col" class="date" nowrap="nowrap">Ref Count</th>
+                        <th scope="col" class="actor">Object</th>
+                    </tr>
+                </thead>
+        
+                <tbody>
+                    {% for pair in pairs %}
+                    <tr class="{% if loop.index0 % 2 == 0 %}even{% else %}odd{% endif %}">
+                        <td nowrap="nowrap" valign="top">{{ pair.refcount }}</td>
+                        <td nowrap="nowrap" valign="top">{{ pair.name }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+            <a class="button" href="javascript:history.back(1)" class="back-link">Cancel</a>
+        </p>
+    </div>
+</body>
+</html>

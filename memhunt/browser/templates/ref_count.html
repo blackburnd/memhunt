@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reference Count</title>
+    <link rel="stylesheet" href="../zpt/debug.css">
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .debug_table { margin-left: 40px; }
+        h1 { font-size: 140%; font-weight: bold; margin-bottom: 10px; padding: 10px 10px; width: 70%; border-bottom: 1px solid #ccc; }
+        .description { margin-right: 35%; margin-left: 3em; }
+        table { border: 1px solid #999; width: 60%; border-collapse: collapse; }
+        table td { text-align: left; vertical-align: middle; font-size: 90%; padding: 2px 5px; border: 1px solid #ddd; }
+        table th { background-color: #ccc; font-size: 90%; font-weight: bolder; padding: 5px; border: 1px solid #999; }
+        .refs { color: green; }
+        .backrefs { font-weight: bold; color: red; }
+        a { color: #0066cc; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+    {% if context.title %}
+    <br><a href=".">Back to {{ context.title }}</a>
+    {% endif %}
+
+    <div class="title">
+        <h1>Reference Count</h1>
+    </div>
+
+    <div class="debug_table">
+        <p class="debug_body description">
+            Garbage Container Objects: <span>{{ garbage_containing }}</span><br>
+            Garbage Watching Objects: <span>{{ garbage_watching }}</span><br>
+            Total Reference Count From Modules: <span>{{ total_ref_count }}</span><br>
+        
+            <table summary="Module Ref Counts" width="100%" class="debug_table">
+                <thead>
+                    <tr>
+                        <th scope="col" class="date" nowrap="nowrap">Ref Count</th>
+                        <th scope="col" class="actor">Module</th>
+                        <th scope="col" class="actor">&nbsp;</th>
+                    </tr>
+                </thead>
+        
+                <tbody>
+                    {% for pair in pairs %}
+                    <tr class="{% if loop.index0 % 2 == 0 %}even{% else %}odd{% endif %}">
+                        <td nowrap="nowrap" valign="top">{{ pair.refcount }}</td>
+                        <td nowrap="nowrap" valign="top">{{ pair.name }}</td>
+                        <td nowrap="nowrap">
+                            <a href="./view_backref?name={{ pair.name }}" class="backrefs">backrefs</a>
+                            <a href="./view_ref?name={{ pair.name }}" class="refs">refs</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+            <a class="button" href="javascript:history.back(1)" class="back-link">Cancel</a>
+        </p>
+    </div>
+</body>
+</html>
